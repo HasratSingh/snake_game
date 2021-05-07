@@ -29,11 +29,11 @@ while game:
         score.update_score()
     # on collision with boundary
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game = False
-        score.game_over()
+        snake.reset_snake()
+        score.reset_scoreboard()
     # on collision with tail
     for s in snake.snake[1:]:
         if snake.head.distance(s) < 15:
-            game = False
-            score.game_over()
+            snake.reset_snake()
+            score.reset_scoreboard()
 screen.exitonclick()

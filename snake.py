@@ -10,15 +10,27 @@ class Snake:
         for i in range(0, self.length):
             x = -i*20
             pos = (x, 0)
-            self.create_square(pos)
+            self.create_snake(pos)
         self.head = self.snake[0]
 
-    def create_square(self, position):
+    def create_snake(self, position):
         square = Turtle("square")
         square.pu()
         square.color("white")
         square.goto(position)
         self.snake.append(square)
+
+    def reset_snake(self):
+        # Deletes previous snake
+        for snake_obj in self.snake:
+            snake_obj.hideturtle()
+        self.snake.clear()
+        # Creates new snake
+        for i in range(0, self.length):
+            x = -i * 20
+            pos = (x, 0)
+            self.create_snake(pos)
+        self.head = self.snake[0]
 
     def move(self):
         for i in range(len(self.snake)-1, 0, -1):
@@ -28,7 +40,7 @@ class Snake:
         self.head.fd(MOVE)
 
     def extend(self):
-        self.create_square(self.snake[-1].position())
+        self.create_snake(self.snake[-1].position())
 
     def turn_left(self):
         self.head.heading() == 0 or self.head.setheading(180)
